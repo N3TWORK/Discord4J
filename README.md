@@ -1,5 +1,22 @@
 # Discord4J
 
+## Releasing to N3TWORK Nexus Repository
+If you haven't, release the `discord-json` if you need to before releasing this.
+
+Branch from the commit you want to release with a branch name like `release/<original version>-N3.<number>`.
+
+Cherry-pick this commit onto that branch.
+
+Update `gradle.properties` so that `version=<original version>-N3.<number>` and `discordJsonVersion` is set to an N3-tagged version if necessary.
+
+Optional: Try releasing with `version=<original version>-N3.<number>-SNAPSHOT` first. If it looks good remove `-SNAPSHOT` and release again.
+
+Make sure `sonatypeUsername` and `sonatypePassword` are set to your username/password for the Nexus repository in `~/.gradle/gradle.properties`.
+
+Run `./gradlew publishAllPublicationsToMavenRepository`.
+
+Don't merge this branch back so that it's easy to fetch updates from upstream.
+
 <a href="https://discord4j.com"><img align="right" src="https://raw.githubusercontent.com/Discord4J/discord4j-web/master/public/logo.svg?sanitize=true" width=27%></a>
 
 [![Support Server Invite](https://img.shields.io/discord/208023865127862272.svg?color=7289da&label=Discord4J&logo=discord&style=flat-square)](https://discord.gg/d4j)

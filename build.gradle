@@ -68,6 +68,19 @@ allprojects {
             maven { url 'https://oss.sonatype.org/content/repositories/staging' }
         }
         maven { url 'https://m2.dv8tion.net/releases' }
+
+        def sonatypeUsername = findProperty('sonatypeUsername')
+        def sonatypePassword = findProperty('sonatypePassword')
+
+        if (sonatypeUsername != null && sonatypePassword != null) {
+            maven {
+                url 'https://nexus.n3twork.com/repository/maven-public/'
+                credentials {
+                    username sonatypeUsername
+                    password sonatypePassword
+                }
+            }
+        }
     }
 
     configurations.all {
@@ -159,9 +172,9 @@ subprojects {
                         }
                     }
                     scm {
-                        url = 'https://github.com/Discord4J/Discord4J'
-                        connection = 'scm:git:git://github.com/Discord4J/Discord4J.git'
-                        developerConnection = 'scm:git:ssh://git@github.com:Discord4J/Discord4J.git'
+                        url = 'https://github.com/Discord4J/N3TWORK'
+                        connection = 'scm:git:git://github.com/N3TWORK/Discord4J.git'
+                        developerConnection = 'scm:git:ssh://git@github.com:N3TWORK/Discord4J.git'
                     }
                     developers {
                         developer {
@@ -176,9 +189,9 @@ subprojects {
             repositories {
                 maven {
                     if (isRelease) {
-                        url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+                        url 'https://nexus.n3twork.com/repository/maven-releases/'
                     } else {
-                        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+                        url 'https://nexus.n3twork.com/repository/maven-snapshots/'
                     }
                     def sonatypeUsername = findProperty('sonatypeUsername')
                     def sonatypePassword = findProperty('sonatypePassword')
@@ -190,17 +203,6 @@ subprojects {
                     }
                 }
             }
-        }
-    }
-
-    if (!isJitpack && isRelease) {
-        signing {
-            def signingKey = findProperty("signingKey")
-            def signingPassword = findProperty("signingPassword")
-            if (signingKey != null && signingPassword != null) {
-                useInMemoryPgpKeys(new String(signingKey.decodeBase64()), signingPassword as String)
-            }
-            sign publishing.publications.mavenJava
         }
     }
 }
