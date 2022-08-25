@@ -306,7 +306,10 @@ public class RestGuild {
         return restClient.getGuildService().modifyGuildWidget(id, request);
     }
 
-    // TODO add Get Guild Vanity URL
+    public Mono<PartialInviteData> getGuildVanityUrl() {
+        return restClient.getGuildService().getGuildVanityUrl(id);
+    }
+
     // TODO add Get Guild Widget Image
 
     public Flux<EmojiData> getEmojis() {

@@ -312,6 +312,12 @@ public class GuildService extends RestService {
                 .bodyToMono(GuildWidgetData.class);
     }
 
+    public Mono<PartialInviteData> getGuildVanityUrl(long guildId) {
+        return Routes.GUILD_VANITY_URL_GET.newRequest(guildId)
+                .exchange(getRouter())
+                .bodyToMono(PartialInviteData.class);
+    }
+
     public Mono<GuildPreviewData> getGuildPreview(long guildId) {
         return Routes.GUILD_PREVIEW_GET.newRequest(guildId)
             .exchange(getRouter())

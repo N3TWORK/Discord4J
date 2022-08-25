@@ -807,6 +807,16 @@ public abstract class Routes {
      */
     public static final Route GUILD_WIDGET_MODIFY = Route.patch("/guilds/{guild.id}/widget");
 
+
+    /**
+     * Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission.
+     * code will be null if a vanity url for the guild is not set.
+     *
+     * @see <a href="https://discord.com/developers/docs/resources/guild#get-guild-vanity-url">
+     * https://discord.com/developers/docs/resources/guild#get-guild-vanity-url</a>
+     */
+    public static final Route GUILD_VANITY_URL_GET = Route.get("/guilds/{guild.id}/vanity-url");
+
     /**
      * Returns the guild preview object. If the user is not in the guild, then the guild must be Discoverable.
      *
